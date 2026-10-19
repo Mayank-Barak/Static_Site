@@ -206,7 +206,7 @@ a:hover .arrow-down { transform: rotate(90deg) translateX(4px); }
 .hero h1 {
   grid-column: 1 / 9; margin: 48px 0 0; z-index: 2;
   font-family: 'Newsreader', serif; font-size: clamp(58px, 6.6vw, 100px);
-  line-height: .84; font-weight: 400; letter-spacing: -.045em;
+  line-height: 1.02; font-weight: 400; letter-spacing: -.045em;
 }
 .hero h1 em { color: var(--moss); font-weight: 400; }
 .hero-bottom { grid-column: 1 / 7; align-self: end; display: grid; grid-template-columns: 1fr auto; gap: 52px; align-items: end; z-index: 2; }
@@ -340,7 +340,7 @@ footer > p { font-family: 'Newsreader', serif; font-size: 26px; margin: 62px 0 8
   .nav a { padding: 15px 0; border-bottom: 1px solid var(--line); }
   .nav-contact { margin-top: 18px; font-family: 'DM Sans', sans-serif; font-size: 13px; justify-content: space-between; }
   .hero { min-height: auto; padding: 42px 20px 0; display: flex; flex-direction: column; }
-  .hero h1 { margin: 58px 0 0; font-size: clamp(52px, 15vw, 72px); line-height: .87; }
+  .hero h1 { margin: 58px 0 0; font-size: clamp(52px, 15vw, 72px); line-height: 1.05; }
   .hero-bottom { margin-top: 48px; display: block; }
   .hero-bottom p { font-size: 15px; max-width: 360px; }
   .hero-bottom .text-link { margin-top: 28px; }
