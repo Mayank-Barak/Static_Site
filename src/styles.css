@@ -426,7 +426,7 @@ body::before {
 .service-row:hover h3 { font-style: italic; }
 .reveal { opacity: 0; transform: translateY(24px); transition: opacity .9s ease, transform .9s cubic-bezier(.2,.7,.1,1); }
 .reveal.is-in { opacity: 1; transform: none; }
-.footer-wordmark { font-family: 'Newsreader', serif; font-size: clamp(64px, 13vw, 190px); line-height: .82; letter-spacing: -.05em; margin: 40px 0 46px; color: var(--paper-light); white-space: nowrap; overflow: hidden; }
+.footer-wordmark { font-family: 'Newsreader', serif; font-size: clamp(64px, 13vw, 190px); line-height: 1.05; letter-spacing: -.05em; margin: 24px 0 28px; color: var(--paper-light); white-space: nowrap; overflow: hidden; }
 .footer-wordmark em { color: var(--acid); }
 @media (prefers-reduced-motion: reduce) {
   .reveal { opacity: 1; transform: none; }
