@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 const Arrow = ({ down = false }: { down?: boolean }) => (
   <svg
@@ -47,12 +47,31 @@ const steps = [
 
 export function MorrowSite() {
   const [menuOpen, setMenuOpen] = useState(false)
+  const [scrolled, setScrolled] = useState(false)
 
   const closeMenu = () => setMenuOpen(false)
 
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 40)
+    onScroll()
+    window.addEventListener('scroll', onScroll, { passive: true })
+    const targets = document.querySelectorAll(
+      '.intro-copy, .office-figure, .section-heading, .service-row, .fit-section > *, .approach-head, .step, .principle blockquote, .contact-copy, .contact-action',
+    )
+    targets.forEach((el) => el.classList.add('reveal'))
+    const io = new IntersectionObserver(
+      (entries) => entries.forEach((e) => {
+        if (e.isIntersecting) { e.target.classList.add('is-in'); io.unobserve(e.target) }
+      }),
+      { threshold: 0.12 },
+    )
+    targets.forEach((el) => io.observe(el))
+    return () => { window.removeEventListener('scroll', onScroll); io.disconnect() }
+  }, [])
+
   return (
     <main>
-      <header className="site-header">
+      <header className={scrolled ? 'site-header is-scrolled' : 'site-header'}>
         <a className="brand" href="#top" aria-label="Morrow Operations Advisory home">
           <span className="brand-mark">M</span>
           <span>Morrow<small>Operations Advisory</small></span>
@@ -76,7 +95,11 @@ export function MorrowSite() {
 
       <section className="hero" id="top">
         <div className="hero-kicker eyebrow">Independent operations consultancy · Bristol / UK-wide</div>
-        <h1>Better operations.<br /><em>Less operational</em><br />theatre.</h1>
+        <h1>
+          <span><span>Better operations.</span></span>
+          <span><span><em>Less operational</em></span></span>
+          <span><span>theatre.</span></span>
+        </h1>
         <div className="hero-bottom">
           <p>
             We help growing businesses replace improvised processes with clearer,
@@ -254,6 +277,7 @@ export function MorrowSite() {
           <span>Morrow<small>Operations Advisory</small></span>
         </a>
         <p>Independent operations advice for growing businesses.</p>
+        <div className="footer-wordmark" aria-hidden="true">Morrow<em>.</em></div>
         <div className="footer-meta">
           <span>Bristol, United Kingdom</span>
           <span>© 2025 Morrow Operations Advisory</span>
