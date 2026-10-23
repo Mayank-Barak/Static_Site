@@ -52,11 +52,19 @@ export function MorrowSite() {
   const closeMenu = () => setMenuOpen(false)
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 40)
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    const heroImg = document.querySelector<HTMLElement>('.hero-visual > img')
+    const onScroll = () => {
+      setScrolled(window.scrollY > 40)
+      if (!reduceMotion && heroImg) {
+        const y = Math.min(window.scrollY, 900)
+        heroImg.style.transform = `translateY(${y * 0.08}px) scale(1.08)`
+      }
+    }
     onScroll()
     window.addEventListener('scroll', onScroll, { passive: true })
     const targets = document.querySelectorAll(
-      '.intro-copy, .office-figure, .section-heading, .service-row, .fit-section > *, .approach-head, .step, .principle blockquote, .contact-copy, .contact-action',
+      '.intro-copy, .office-figure, .section-heading, .service-row, .fit-section > *, .approach-head, .step, .principle blockquote, .contact-copy, .contact-action, .signal, .footer-wordmark',
     )
     targets.forEach((el) => el.classList.add('reveal'))
     const io = new IntersectionObserver(
