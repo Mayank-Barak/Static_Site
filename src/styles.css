@@ -428,7 +428,47 @@ body::before {
 .reveal.is-in { opacity: 1; transform: none; }
 .footer-wordmark { font-family: 'Newsreader', serif; font-size: clamp(64px, 13vw, 190px); line-height: 1.05; letter-spacing: -.05em; margin: 24px 0 28px; color: var(--paper-light); white-space: nowrap; overflow: hidden; }
 .footer-wordmark em { color: var(--acid); }
+
+/* ---- Motion pass ---- */
+.nav > a:not(.nav-contact) { position: relative; }
+.nav > a:not(.nav-contact)::after {
+  content: ""; position: absolute; left: 0; bottom: -4px; width: 100%; height: 1px;
+  background: var(--ink); transform: scaleX(0); transform-origin: right;
+  transition: transform .3s cubic-bezier(.2, .7, .1, 1);
+}
+.nav > a:not(.nav-contact):hover::after { transform: scaleX(1); transform-origin: left; }
+.brand-mark { transition: transform .35s cubic-bezier(.2, .7, .1, 1); }
+.brand:hover .brand-mark { transform: rotate(-10deg); }
+.hero-visual { animation: hero-settle 1.6s .2s cubic-bezier(.2, .7, .1, 1) both; }
+@keyframes hero-settle { from { opacity: 0; transform: translateY(36px); } }
+.hero-visual > img { will-change: transform; }
+.text-link .arrow-down { animation: nudge 2.4s 1.4s ease-in-out infinite; }
+@keyframes nudge {
+  0%, 100% { transform: rotate(90deg) translateX(0); }
+  50% { transform: rotate(90deg) translateX(7px); }
+}
+.image-index { transition: transform .35s cubic-bezier(.2, .7, .1, 1), box-shadow .35s cubic-bezier(.2, .7, .1, 1); }
+.hero-visual:hover .image-index { transform: translate(-5px, -5px); box-shadow: 14px 14px 0 var(--ink); }
+.visual-stamp {
+  animation:
+    spin-in 1.2s .4s cubic-bezier(.2, .7, .1, 1) both,
+    wobble 7s 1.8s ease-in-out infinite alternate;
+}
+@keyframes wobble { from { transform: rotate(8deg); } to { transform: rotate(14deg); } }
+.service-row.reveal:nth-child(2) { transition-delay: .08s; }
+.service-row.reveal:nth-child(3) { transition-delay: .16s; }
+.service-row.reveal:nth-child(4) { transition-delay: .24s; }
+.signal.reveal:nth-child(3) { transition-delay: .08s; }
+.signal.reveal:nth-child(4) { transition-delay: .16s; }
+.signal.reveal:nth-child(5) { transition-delay: .24s; }
+.step.reveal:nth-child(2) { transition-delay: .08s; }
+.step.reveal:nth-child(3) { transition-delay: .16s; }
+.step.reveal:nth-child(4) { transition-delay: .24s; }
+.contact-action > a { transition: padding .3s cubic-bezier(.2, .7, .1, 1); }
+.contact-action > a:hover { padding-left: 14px; }
+.footer-wordmark { animation: wordmark-drift 14s ease-in-out infinite alternate; }
+@keyframes wordmark-drift { from { transform: translateX(0); } to { transform: translateX(2.5%); } }
 @media (prefers-reduced-motion: reduce) {
-  .reveal { opacity: 1; transform: none; }
-  .hero h1 > span > span, .visual-stamp { animation: none; }
+  .hero-visual, .text-link .arrow-down, .footer-wordmark { animation: none; }
+  .visual-stamp { animation: none; transform: rotate(8deg); }
 }
