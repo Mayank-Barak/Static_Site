@@ -20,7 +20,11 @@ export default defineConfig({
   ...(githubPages
     ? {
         vite: { base: `/${pagesBasePath}/` },
-        nitro: { preset: "static" },
+        tanstackStart: {
+          server: { entry: "server" },
+          pages: [{ path: "/" }],
+          prerender: { enabled: true, autoStaticPathsDiscovery: false },
+        },
       }
     : {}),
 });
